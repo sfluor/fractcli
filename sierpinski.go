@@ -57,7 +57,10 @@ func sierpinski(size int) {
 
 	wg.Wait()
 	// Create the file where our image will be stored
-	toimg, _ := os.Create("sierpinski" + strconv.Itoa(size) + ".jpg")
+	toimg, err := os.Create("sierpinski" + strconv.Itoa(size) + ".jpg")
+	if err != nil {
+		panic(err)
+	}
 	defer toimg.Close()
 	// Register image
 	jpeg.Encode(toimg, img, &jpeg.Options{jpeg.DefaultQuality})

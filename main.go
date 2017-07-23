@@ -25,7 +25,7 @@ func main() {
 	// Parse flags
 	flag.Parse()
 
-	// Switch on fractal name that has been asked
+	// Switch on fractal name that have been asked
 	switch *name {
 	case "mandelbrot":
 		mandelbrot(float64(*size), float64(*limit))

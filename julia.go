@@ -53,7 +53,10 @@ func julia(size float64, limit float64, c complex128) {
 	// Wait for our goroutines to end
 	wg.Wait()
 	// Create the file where our image will be stored
-	toimg, _ := os.Create("julia" + fmt.Sprintf("z0_%v_", c) + strconv.FormatFloat(size, 'E', -1, 64) + ".jpg")
+	toimg, err := os.Create("julia" + fmt.Sprintf("z0_%v_", c) + strconv.FormatFloat(size, 'E', -1, 64) + ".jpg")
+	if err != nil {
+		panic(err)
+	}
 	defer toimg.Close()
 	// Register imagee
 	jpeg.Encode(toimg, img, &jpeg.Options{jpeg.DefaultQuality})
