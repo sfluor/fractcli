@@ -1,1 +1,4 @@
 *.jpg
+!julia.jpg
+!sierpinski.jpg
+!mandelbrot.jpg
