@@ -8,7 +8,6 @@ import (
 	"math"
 	"math/rand"
 	"os"
-	"strconv"
 	"sync"
 	"time"
 )
@@ -32,7 +31,7 @@ func midpoint(p, q [2]float64) (float64, float64) {
 }
 
 // Create a sierpinski of the given size
-func sierpinski(size int) {
+func sierpinski(size int, output string) {
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, size, size))
 	// initialize image
@@ -57,7 +56,7 @@ func sierpinski(size int) {
 
 	wg.Wait()
 	// Create the file where our image will be stored
-	toimg, err := os.Create("sierpinski" + strconv.Itoa(size) + ".jpg")
+	toimg, err := os.Create(output)
 	if err != nil {
 		panic(err)
 	}

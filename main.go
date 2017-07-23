@@ -21,6 +21,7 @@ func main() {
 	re := flag.Float64("re", 0.285, "Real part of the complex number for julia's set computation")
 	im := flag.Float64("im", 0.0013, "Imaginary part of the complex number for julia's set computation")
 	limit := flag.Int("limit", 200, "Limit of iteration to consider the sequence is bounded")
+	output := flag.String("output", "myfractal.jpg", "Name of the image file to output, format should be jpeg")
 
 	// Parse flags
 	flag.Parse()
@@ -28,15 +29,17 @@ func main() {
 	// Switch on fractal name that have been asked
 	switch *name {
 	case "mandelbrot":
-		mandelbrot(float64(*size), float64(*limit))
+		mandelbrot(float64(*size), float64(*limit), *output)
 
 	case "sierpinski":
-		sierpinski(*size)
+		sierpinski(*size, *output)
 
 	case "julia":
-		julia(float64(*size), float64(*limit), complex(*re, *im))
+		julia(float64(*size), float64(*limit), complex(*re, *im), *output)
 
 	default:
 		fmt.Println("Sorry this fractal name isn't handled here")
+		return
 	}
+	fmt.Println("Computation Ended !")
 }

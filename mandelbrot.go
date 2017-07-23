@@ -8,7 +8,6 @@ import (
 	"image/jpeg"
 	"math/cmplx"
 	"os"
-	"strconv"
 	"sync"
 )
 
@@ -26,7 +25,7 @@ func InMandelbrot(c complex128, n float64) (bool, float64) {
 }
 
 // Create a mandelbrot img of the given size
-func mandelbrot(size float64, limit float64) {
+func mandelbrot(size float64, limit float64, output string) {
 	fmt.Print("Creating image...")
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, int(size), int(size)))
@@ -59,7 +58,7 @@ func mandelbrot(size float64, limit float64) {
 	wg.Wait()
 
 	// Create the file where our image will be stored
-	toimg, err := os.Create("mandel" + strconv.FormatFloat(size, 'E', -1, 64) + ".jpg")
+	toimg, err := os.Create(output)
 	if err != nil {
 		panic(err)
 	}

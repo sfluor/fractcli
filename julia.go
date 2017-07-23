@@ -1,14 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/jpeg"
 	"math/cmplx"
 	"os"
-	"strconv"
 	"sync"
 )
 
@@ -26,7 +24,7 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 }
 
 // Create a julia img of the given size
-func julia(size float64, limit float64, c complex128) {
+func julia(size float64, limit float64, c complex128, output string) {
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, int(size), int(size)))
 	// initialize image
@@ -53,7 +51,7 @@ func julia(size float64, limit float64, c complex128) {
 	// Wait for our goroutines to end
 	wg.Wait()
 	// Create the file where our image will be stored
-	toimg, err := os.Create("julia" + fmt.Sprintf("z0_%v_", c) + strconv.FormatFloat(size, 'E', -1, 64) + ".jpg")
+	toimg, err := os.Create(output)
 	if err != nil {
 		panic(err)
 	}
