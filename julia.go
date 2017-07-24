@@ -24,7 +24,7 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 }
 
 // Create a julia img of the given size
-func julia(size float64, limit float64, c complex128, output string) {
+func julia(size float64, limit float64, c complex128, output string, colorized bool) {
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, int(size), int(size)))
 	// initialize image
@@ -34,6 +34,9 @@ func julia(size float64, limit float64, c complex128, output string) {
 	var wg sync.WaitGroup
 	// Wait for all columns to finish ( a go routine per column of pixels)
 	wg.Add(int(size))
+
+	mapColors := constructColorMap(limit, colorized)
+
 	for x := float64(0); x < size; x++ {
 		// Our go routine (we have to pass x as a value otherwise its value will change overtime)
 		go func(img *image.RGBA, x float64) {
@@ -42,9 +45,9 @@ func julia(size float64, limit float64, c complex128, output string) {
 			// Check for our column
 			for y := float64(0); y < size; y++ {
 				_, gap := InJulia(complex(3*x/size-1.5, 3*y/size-1.5), c, limit)
-				c := uint8(255 * gap / limit)
-				// Set the color of our pixel with grey level
-				img.Set(int(x), int(y), color.RGBA{c, c, c, 255})
+				r, g, b := mapColors(gap)
+				// Set the color of our pixel
+				img.Set(int(x), int(y), color.RGBA{r, g, b, 255})
 			}
 		}(img, x)
 	}

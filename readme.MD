@@ -5,6 +5,8 @@ Simple CLI tool to build fractals image
 Possibles flags: 
 ```
 Usage of ./fractcli:
+  -colorized
+        If the output should be colorized (not possible for sierpinski ATM) (default true)
   -im float
         Imaginary part of the complex number for julia's set computation (default 0.0013)
   -limit int
@@ -17,6 +19,7 @@ Usage of ./fractcli:
         Real part of the complex number for julia's set computation (default 0.285)
   -size int
         Size of the fractal image in px (default 400)
+
 ```
 
 ## Possible fractals
@@ -31,6 +34,10 @@ For example, `./fractcli --output=mandelbrot.jpg --size=600` outputs
 
 ## Julia's set for c=0.3+0.5*i
 `./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` outputs
+
+![colorfuljulia](/home/sfluor/go/src/fractcli/colorfuljulia.jpg)
+
+And`./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` outputs
 ![Julia image](./julia.jpg)
 
 ### TODO

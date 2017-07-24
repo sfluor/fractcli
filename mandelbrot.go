@@ -25,7 +25,7 @@ func InMandelbrot(c complex128, n float64) (bool, float64) {
 }
 
 // Create a mandelbrot img of the given size
-func mandelbrot(size float64, limit float64, output string) {
+func mandelbrot(size float64, limit float64, output string, colorized bool) {
 	fmt.Print("Creating image...")
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, int(size), int(size)))
@@ -38,6 +38,8 @@ func mandelbrot(size float64, limit float64, output string) {
 	// Wait for all columns to finish ( a go routine per column of pixels)
 	wg.Add(int(size))
 
+	mapColors := constructColorMap(limit, colorized)
+
 	for x := float64(0); x < size; x++ {
 		// Our go routine (we have to pass x as a value otherwise its value will change overtime)
 
@@ -48,9 +50,9 @@ func mandelbrot(size float64, limit float64, output string) {
 			// Check for our column
 			for y := float64(0); y < size; y++ {
 				_, gap := InMandelbrot(complex(3*x/size-1.5, 3*y/size-1.5), limit)
-				c := uint8(255 * gap / limit)
-				// Set the color of our pixel with grey level
-				img.Set(int(x), int(y), color.RGBA{c, c, c, 255})
+				r, g, b := mapColors(gap)
+				// Set the color of our pixel
+				img.Set(int(x), int(y), color.RGBA{r, g, b, 255})
 			}
 		}(img, x)
 	}
