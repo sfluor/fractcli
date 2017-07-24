@@ -42,5 +42,5 @@ And`./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` out
 
 ### TODO
 
-- Add colors
 - Add Koch Snowflake
+- Add newton fractals
