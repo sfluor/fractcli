@@ -35,7 +35,7 @@ For example, `./fractcli --output=mandelbrot.jpg --size=600` outputs
 ## Julia's set for c=0.3+0.5*i
 `./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` outputs
 
-![colorfuljulia](/home/sfluor/go/src/fractcli/colorfuljulia.jpg)
+![colorfuljulia](./colorfuljulia.jpg)
 
 And`./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` outputs
 ![Julia image](./julia.jpg)
