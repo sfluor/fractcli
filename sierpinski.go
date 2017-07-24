@@ -31,7 +31,7 @@ func midpoint(p, q [2]float64) (float64, float64) {
 }
 
 // Create a sierpinski of the given size
-func sierpinski(size int, output string) {
+func sierpinski(size int, output string, colorized bool) {
 	// Create our image
 	img := image.NewRGBA(image.Rect(0, 0, size, size))
 	// initialize image
@@ -41,13 +41,17 @@ func sierpinski(size int, output string) {
 	// We spawn go routines
 	var wg sync.WaitGroup
 	wg.Add(size)
+
+	mapColors := constructColorMap(float64(size), colorized)
+
 	for i := 0; i < size; i++ {
 		x := 0.3
 		y := 0.19
 		go func(x, y float64) {
 			defer wg.Done()
 			for j := 0; j < size; j++ {
-				img.Set(int(x*float64(size)), size-int(y*float64(size)), color.RGBA{255, 255, 255, 255})
+				r, g, b := mapColors((y - x) * float64(size))
+				img.Set(int(x*float64(size)), size-int(y*float64(size)), color.RGBA{r, g, b, 255})
 				k := random(3)
 				x, y = midpoint(corner[k], [2]float64{x, y})
 			}

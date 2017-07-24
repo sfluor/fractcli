@@ -22,7 +22,7 @@ func main() {
 	im := flag.Float64("im", 0.0013, "Imaginary part of the complex number for julia's set computation")
 	limit := flag.Int("limit", 200, "Limit of iteration to consider the sequence is bounded")
 	output := flag.String("output", "myfractal.jpg", "Name of the image file to output, format should be jpeg")
-	colorized := flag.Bool("colorized", true, "If the output should be colorized (not possible for sierpinski ATM)")
+	colorized := flag.Bool("colorized", false, "If the output should be colorized (not possible for sierpinski ATM)")
 
 	// Parse flags
 	flag.Parse()
@@ -33,7 +33,7 @@ func main() {
 		mandelbrot(float64(*size), float64(*limit), *output, *colorized)
 
 	case "sierpinski":
-		sierpinski(*size, *output)
+		sierpinski(*size, *output, *colorized)
 
 	case "julia":
 		julia(float64(*size), float64(*limit), complex(*re, *im), *output, *colorized)

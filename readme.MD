@@ -25,15 +25,15 @@ Usage of ./fractcli:
 ## Possible fractals
 
 ### Mandelbrot's Set
-For example, `./fractcli --output=mandelbrot.jpg --size=600` outputs
+For example, `./fractcli --output=mandelbrot.jpg --size=6000` outputs
 ![Mandelbrot image](./mandelbrot.jpg)
 
 ## Sierpinski's fractal
-`./fractcli --name=sierpinski --output=sierpinski.jpg --size=600` outputs
+`./fractcli --name=sierpinski --output=sierpinski.jpg --size=6000` outputs
 ![Sierpinski image](./sierpinski.jpg)
 
 ## Julia's set for c=0.3+0.5*i
-`./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000` outputs
+`./fractcli -name=julia --re=0.3 --im=0.5 --output=julia.jpg --size=6000 --colorized` outputs
 
 ![colorfuljulia](./colorfuljulia.jpg)
 
